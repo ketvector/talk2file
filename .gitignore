@@ -6,6 +6,7 @@ bin/
 lib64
 # C extensions
 *.so
+test/data/**
 
 # Distribution / packaging
 .Python
