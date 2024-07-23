@@ -1,8 +1,8 @@
 from openai import OpenAI
 
 from argparse import ArgumentParser
-import os
 from dotenv import load_dotenv
+import json
 
 from service import get_agent, get_store, query
 
@@ -23,7 +23,7 @@ if __name__ == "__main__":
     agent = get_agent(client, agent_id)
     store = get_store(client, store_id)
     answer = query(agent, [store], questions)
-    print(answer)
+    print(json.dumps(answer, indent=4))
 
 
 
