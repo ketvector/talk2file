@@ -1,13 +1,9 @@
 from openai import OpenAI
 
-from argparse import ArgumentParser
-from dotenv import load_dotenv
-import json
-
 from .openai_assistants_agent import OpenAIAssistantsAgent
 from .openai_assistants_store import OpenAIAssistantsStore
 
-load_dotenv(override=True)
+
 client = OpenAI()
 
 def get_agent(id):
