@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 bin/
 lib64
+dbper/
 # C extensions
 *.so
 test/data/**

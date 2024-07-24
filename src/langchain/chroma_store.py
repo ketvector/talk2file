@@ -1,9 +1,14 @@
 import chromadb
+from .utils import load_document, split, get_embedding_function
 import os
 
-from .utils import load_document, split, get_embedding_function
-
 class ChromaStore():
+    @staticmethod
+    def get_from_id(id):
+        chroma_host = os.environ["LANGCHAIN_CHROMA_HOST"]
+        chroma_port = os.environ["LANGCHAIN_CHROMA_PORT"]
+        store = ChromaStore(chroma_host, chroma_port, id)
+        return store
     def __init__(self, host, port, id):
         self.store = chromadb.HttpClient(host=host, port=port)
         self.collection = self.store.get_or_create_collection(name=id, embedding_function=get_embedding_function())

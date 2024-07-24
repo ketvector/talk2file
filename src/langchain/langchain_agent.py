@@ -1,18 +1,21 @@
 from langchain_chroma import Chroma
-from .chroma_store import ChromaStore
 from .utils import get_embedding_function
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.chains import create_retrieval_chain
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_openai import ChatOpenAI
 
+import os
+
+from .chroma_store import ChromaStore
 
 class LangchainAgent():
     def __init__(self):
-        self.llm = ChatOpenAI(model="gpt-3.5-turbo-0125")
+        LANGCHAIN_OPEN_AI_MODEL = os.environ["LANGCHAIN_OPEN_AI_MODEL"]
+        self.llm = ChatOpenAI(model=LANGCHAIN_OPEN_AI_MODEL)
 
     def query(self, questions, store_ids):
-        persistent_client = ChromaStore(host="localhost", port=8001, id = store_ids[0])
+        persistent_client = ChromaStore.get_from_id(store_ids[0])
         langchain_chroma = Chroma(
                 client=persistent_client.store,
                 collection_name=store_ids[0],
@@ -34,8 +37,19 @@ class LangchainAgent():
                         ("human", "{input}"),
                     ]
                 )
-        print("XXXXXXXXXXXXXXXX")
+        
         question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
         rag_chain = create_retrieval_chain(retriever, question_answer_chain)
-        results = rag_chain.invoke({"input": questions[0]})
-        return results
+        results = []
+        for question in questions:
+            result = rag_chain.invoke({"input": question})
+            print(result)
+            results.append(
+                {
+                    "question" : question,
+                    "answer": result["answer"]
+                }
+            )
+        return {
+            "responses" : results
+        }

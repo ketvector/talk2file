@@ -1,7 +1,6 @@
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 import chromadb.utils.embedding_functions as embedding_functions
-import os
 from langchain_openai import OpenAIEmbeddings
 
 
