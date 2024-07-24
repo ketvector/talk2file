@@ -9,6 +9,7 @@ class ChromaStore():
         chroma_port = os.environ["LANGCHAIN_CHROMA_PORT"]
         store = ChromaStore(chroma_host, chroma_port, id)
         return store
+    
     def __init__(self, host, port, id):
         self.store = chromadb.HttpClient(host=host, port=port)
         self.collection = self.store.get_or_create_collection(name=id, embedding_function=get_embedding_function())

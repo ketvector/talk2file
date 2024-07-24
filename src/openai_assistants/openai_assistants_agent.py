@@ -1,4 +1,5 @@
 from openai import OpenAI
+import os
 
 class OpenAIAssistantsAgent:
     def __init__(self, client, id=None,  name="OpenAIAssistantsAgent"):
@@ -6,10 +7,11 @@ class OpenAIAssistantsAgent:
 
 
         if id == None:
+            model = os.environ["OPENAI_ASST_MODEL"]
             self.assistant = self.client.beta.assistants.create(
                 name=name,
                 instructions="You are an expert pdf reader. Use your knowledge base to answer the questions asked to you",
-                model="gpt-3.5-turbo-0125",
+                model=model,
                 tools=[{"type": "file_search"}],
             )
         else:
