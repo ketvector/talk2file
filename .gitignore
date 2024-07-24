@@ -8,6 +8,7 @@ dbper/
 # C extensions
 *.so
 test/data/**
+share/**
 
 # Distribution / packaging
 .Python

@@ -8,7 +8,11 @@ from langchain_openai import ChatOpenAI
 import os
 
 from .chroma_store import ChromaStore
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
 class LangchainAgent():
     def __init__(self):
         LANGCHAIN_OPEN_AI_MODEL = os.environ["LANGCHAIN_OPEN_AI_MODEL"]
@@ -21,7 +25,9 @@ class LangchainAgent():
                 collection_name=store_ids[0],
                 embedding_function=get_embedding_function(),
             )
-        retriever = langchain_chroma.as_retriever()
+        
+        retriever = langchain_chroma.as_retriever(search_type="similarity", search_kwargs={"k": 6})
+        
         system_prompt = (
             "You are an assistant for question-answering tasks. "
             "Use the following pieces of retrieved context to answer "
@@ -31,6 +37,7 @@ class LangchainAgent():
             "\n\n"
             "{context}"
         )
+        
         prompt = ChatPromptTemplate.from_messages(
                     [
                         ("system", system_prompt),
@@ -38,16 +45,21 @@ class LangchainAgent():
                     ]
                 )
         
-        question_answer_chain = create_stuff_documents_chain(self.llm, prompt)
-        rag_chain = create_retrieval_chain(retriever, question_answer_chain)
+        rag_chain = (
+            {"context": retriever | format_docs, "input": RunnablePassthrough()}
+            | prompt
+            | self.llm
+            | StrOutputParser()
+        )
+        
         results = []
         for question in questions:
-            result = rag_chain.invoke({"input": question})
+            result = rag_chain.invoke(question)
             print(result)
             results.append(
                 {
                     "question" : question,
-                    "answer": result["answer"]
+                    "answer": result
                 }
             )
         return {
