@@ -16,4 +16,7 @@ def split(docs):
 
 def get_embedding_function():
     return embedding_functions.create_langchain_embedding(OpenAIEmbeddings())
+
+def format_docs(docs):
+    return "\n\n".join(doc.page_content for doc in docs)
     

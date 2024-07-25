@@ -7,16 +7,16 @@ from langchain_core.output_parsers import StrOutputParser
 import os
 
 from .chroma_store import ChromaStore
-from .utils import get_embedding_function
+from .utils import get_embedding_function, format_docs
 
 
-def format_docs(docs):
-    return "\n\n".join(doc.page_content for doc in docs)
+
 class LangchainAgent():
     def __init__(self):
         LANGCHAIN_OPEN_AI_MODEL = os.environ["LANGCHAIN_OPEN_AI_MODEL"]
         self.llm = ChatOpenAI(model=LANGCHAIN_OPEN_AI_MODEL)
 
+    
     def query(self, questions, store_ids):
         persistent_client = ChromaStore.get_from_id(store_ids[0])
         langchain_chroma = Chroma(
