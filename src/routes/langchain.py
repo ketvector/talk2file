@@ -4,10 +4,10 @@ from typing import Annotated
 
 
 from ..langchain.service import add_file_to_store, query as query_service
-
+import os
 class AddToStoreBody(BaseModel):
     store_id: str
-    file_path: str
+    file_id: str
 
 router = APIRouter(
     prefix="/langchain",
@@ -16,7 +16,8 @@ router = APIRouter(
 
 @router.post("/store/add")
 async def add_to_store(body: AddToStoreBody):
-    add_file_to_store(body.store_id, body.file_path)
+    file_path = os.environ['LOCAL_FILE_UPLOAD_DIRECTORY']
+    add_file_to_store(body.store_id, f"{file_path}/{body.file_id}.pdf")
     return {
         "status" : "success"
     }
