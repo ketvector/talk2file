@@ -30,6 +30,8 @@ There are two implementations I have provided for the interfaces:
 
 
 **5. Proposed Improvements:**
+
+**5.1: Infra**
 - A lot of the computation is time consuming so a synchronous GET/POST for asking questions or ingesting files is not the best approach. A better approach would be to design asynchronous APIs using a combination of databases (MongoDB) and queues (RabbitMQ).
 
 - As an example of the previous point, the query routes could be designed as:
