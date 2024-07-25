@@ -71,5 +71,8 @@ class OpenAIAssistantsAgent(IAgent):
             "responses" : json_response_array 
         }
 
+    def get_id(self):
+        return self.assistant.id
+
 
     
