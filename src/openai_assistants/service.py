@@ -21,3 +21,7 @@ def create_store(name):
 def query(agent_id, store_ids, questions):
     agent = OpenAIAssistantsAgent(client=client, id=agent_id)
     return agent.query(questions , store_ids)
+
+def add_file_to_store(store_id, file_path):
+    store = get_store(store_id)
+    store.add(file_paths=[file_path])

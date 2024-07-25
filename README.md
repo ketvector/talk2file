@@ -40,11 +40,19 @@ There are two implementations I have provided for the interfaces:
 
 - As an example of the previous point, the query routes could be designed as:
    
-   - 1: Post your questions and store resources using a simple POST API.
+   - 1: Client posts questions using a simple POST API.
    - 2: The backend takes questions from step 1 and adds it to queue. To the client it provides a request-id for this request. The client can use the request-id to poll for when the answer becomes available.
    - 3: A different service picks the questions from queue, gets the answers and posts it back to queue
    - 4: A different service picks up the answers and posts to slack
    - 5: The client can get the status of all the tasks using polling on the request-id it was given.
+
+- We can also think about streaming the answers. The openAI and langchain sdks support streaming out of the box and I can use them 
+  
+**5.3: Code Quality**
+- Resolve all the TODOs
+- Better error handling at some places
+- modify apis to support files being added to store in one call (services already support this)
+- better API responses to clients in upload to store apis (instead of simple "success")
   
 
 

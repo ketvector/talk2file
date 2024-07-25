@@ -4,7 +4,8 @@ from typing import Annotated
 
 from ..langchain.service import add_file_to_store, query as query_service
 from ..slack.service import send
-from ..schemas.langchain import AddToStoreBody, QueryAndPostBody
+from ..schemas.langchain import QueryAndPostBody
+from ..schemas.common import AddToStoreBody
 import os
 import json
 
