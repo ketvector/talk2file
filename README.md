@@ -26,7 +26,11 @@ There are two implementations I have provided for the interfaces:
   - You can view the APIs with examples in Postman :
   
      [<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/7638829-4199003a-6846-4c9b-96cb-749e743c9b95?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D7638829-4199003a-6846-4c9b-96cb-749e743c9b95%26entityType%3Dcollection%26workspaceId%3D695166a5-a212-4b07-8aab-781842a14dff)
-  - To run the server locally, run `fastapi dev main.py` from inside the `src` folder
+  - To run the server locally,
+      - install dependencies using `pip3 install -r requirements.txt` from the root folder.
+      - create a `.env` file in the root folder. You can copy the contents of `.env.example` and fill in the variables. You can use defaults and just change the keys.
+      - if hitting the `/langchain` apis, also start the chroma server using `chroma run --path ./ --port 8001`. Here I am assuming you are using port 8001 from `.env`
+      - run `fastapi dev main.py` from inside the `src` folder. this is for dev mode. i have only tested with this.
 
 
 **5. Proposed Improvements:**
