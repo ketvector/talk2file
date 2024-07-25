@@ -17,6 +17,7 @@ class OpenAIAssistantsStore(IStore):
         )
  
         # You can print the status and the file counts of the batch to see the result of this operation.
+        # TODO: proper error handling
         print(file_batch.status)
         print(file_batch.file_counts)
     

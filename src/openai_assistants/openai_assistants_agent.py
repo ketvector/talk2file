@@ -44,7 +44,7 @@ class OpenAIAssistantsAgent(IAgent):
             )
 
             run = self.client.beta.threads.runs.create_and_poll(
-                thread_id=thread.id, assistant_id=self.assistant.id
+                thread_id=thread.id, assistant_id=self.assistant.id, temperature=0.0
             )
 
             answers = list(self.client.beta.threads.messages.list(thread_id=thread.id, run_id=run.id))

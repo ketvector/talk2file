@@ -1,9 +1,7 @@
-from pydantic import BaseModel
-
 """
     Interface for a Store of files
 """
-class IStore(BaseModel):
+class IStore():
     """
         add files to store.
 

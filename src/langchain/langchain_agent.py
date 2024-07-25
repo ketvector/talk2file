@@ -14,7 +14,7 @@ from .utils import get_embedding_function, format_docs
 class LangchainAgent():
     def __init__(self):
         LANGCHAIN_OPEN_AI_MODEL = os.environ["LANGCHAIN_OPEN_AI_MODEL"]
-        self.llm = ChatOpenAI(model=LANGCHAIN_OPEN_AI_MODEL)
+        self.llm = ChatOpenAI(model=LANGCHAIN_OPEN_AI_MODEL, temperature=0)
 
     
     def query(self, questions, store_ids):
@@ -31,8 +31,8 @@ class LangchainAgent():
             "You are an assistant for question-answering tasks. "
             "Use the following pieces of retrieved context to answer "
             "the question. If you don't know the answer, say that you "
-            "don't know. Use three sentences maximum and keep the "
-            "answer concise."
+            "don't know. Do not paraphrase. Use the words and sentences from the retrived context"
+            "as much as you can."
             "\n\n"
             "{context}"
         )
