@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Query
-from pydantic import BaseModel
+from fastapi import APIRouter, Query, HTTPException
 from typing import Annotated
 
 
@@ -30,6 +29,7 @@ async def query(storeids: Annotated[list[str] | None, Query()],  questions: Anno
     print(answer)
     return answer
 
+#TODO: Generalise to targets other than slack
 @router.post("/query")
 async def queryAndPost(body: QueryAndPostBody):
     answer = query_service(store_ids=body.storeids, questions=body.questions)
@@ -44,8 +44,6 @@ async def queryAndPost(body: QueryAndPostBody):
             }]
         }
     else:
-        return {
-            "status" : "Not Okay"
-        }
-    #TODO: Generalise to other targets
+        HTTPException(400, detail="Invalid document type")
+    
     
