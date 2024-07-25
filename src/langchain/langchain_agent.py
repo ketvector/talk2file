@@ -1,15 +1,14 @@
 from langchain_chroma import Chroma
-from .utils import get_embedding_function
 from langchain_core.prompts import ChatPromptTemplate
-from langchain.chains import create_retrieval_chain
-from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_openai import ChatOpenAI
+from langchain_core.runnables import RunnablePassthrough
+from langchain_core.output_parsers import StrOutputParser
 
 import os
 
 from .chroma_store import ChromaStore
-from langchain_core.runnables import RunnablePassthrough
-from langchain_core.output_parsers import StrOutputParser
+from .utils import get_embedding_function
+
 
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)

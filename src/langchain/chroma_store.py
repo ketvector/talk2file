@@ -1,8 +1,11 @@
 import chromadb
-from .utils import load_document, split, get_embedding_function
+
 import os
 
-class ChromaStore():
+from .utils import load_document, split, get_embedding_function
+from ..interface.i_store import IStore
+
+class ChromaStore(IStore):
     @staticmethod
     def get_from_id(id):
         chroma_host = os.environ["LANGCHAIN_CHROMA_HOST"]

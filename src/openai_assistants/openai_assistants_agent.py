@@ -1,6 +1,8 @@
 import os
 
-class OpenAIAssistantsAgent:
+from ..interface.i_agent import IAgent
+
+class OpenAIAssistantsAgent(IAgent):
     def __init__(self, client, id=None,  name="OpenAIAssistantsAgent"):
         self.client = client
 

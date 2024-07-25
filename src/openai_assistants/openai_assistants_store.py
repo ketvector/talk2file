@@ -1,6 +1,5 @@
-from openai import OpenAI
-
-class OpenAIAssistantsStore:
+from ..interface.i_store import IStore
+class OpenAIAssistantsStore(IStore):
     def __init__(self, client, id = "None", name="OpenAIAssistantsStore"):
         self.client = client
         if id == None:
