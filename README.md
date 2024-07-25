@@ -46,9 +46,13 @@ There are two implementations I have provided for the interfaces:
    - 4: A different service picks up the answers and posts to slack
    - 5: The client can get the status of all the tasks using polling on the request-id it was given.
 
-- We can also think about streaming the answers. The openAI and langchain sdks support streaming out of the box and I can use them 
-  
-**5.3: Code Quality**
+- We can also think about streaming the answers. The openAI and langchain sdks support streaming out of the box and I can use them
+ 
+**5.2: RAG Quality**
+
+**5.3: Benchmarking/Metrics**
+
+**5.4: Code Quality**
 - Resolve all the TODOs
 - Better error handling at some places
 - modify apis to support files being added to store in one call (services already support this)
