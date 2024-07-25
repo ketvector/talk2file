@@ -4,10 +4,11 @@ from typing import Annotated
 
 
 from ..langchain.service import add_file_to_store, query as query_service
+from ..slack.service import send
+from ..schemas.langchain import AddToStoreBody, QueryAndPostBody
 import os
-class AddToStoreBody(BaseModel):
-    store_id: str
-    file_id: str
+import json
+
 
 router = APIRouter(
     prefix="/langchain",
@@ -28,4 +29,23 @@ async def query(storeids: Annotated[list[str] | None, Query()],  questions: Anno
     answer = query_service(store_ids=storeids, questions=questions)
     print(answer)
     return answer
+
+@router.post("/query")
+async def queryAndPost(body: QueryAndPostBody):
+    answer = query_service(store_ids=body.storeids, questions=body.questions)
+    send_to  = body.sendto[0]
+    if send_to.target == "slack":
+        send(json.dumps(answer, indent=4), send_to.channel, send_to.username, os.environ['SLACK_WORKSPACE_ACCESS_TOKEN'])
+        return {
+            "answer" : answer,
+            "sendto" : [{
+                "target" : "slack",
+                "status": "success"
+            }]
+        }
+    else:
+        return {
+            "status" : "Not Okay"
+        }
+    #TODO: Generalise to other targets
     
