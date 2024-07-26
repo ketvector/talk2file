@@ -1,3 +1,5 @@
+Please check [./submission_checklist.md](./submission_checklist.md) before reading the Readme
+
 **1. What does the code do ?:**
 
 - APIs to support question answering from files. (Supports only PDF for now, will add support for other files later)
