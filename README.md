@@ -69,6 +69,9 @@ like the `openai-assistants` file search implementation does.
 - Better error handling at some places
 - modify apis to support files being added to store in one call (services already support this)
 - better API responses to clients in upload to store apis (instead of simple "success")
+
+**6. Known Issues**
+- File upload from postman intermittently errors due to what is most likely a Postman bug. [Bug](https://stackoverflow.com/questions/64972165/fastapi-error-uploading-files-bigger-than-100kb)
   
 
 
