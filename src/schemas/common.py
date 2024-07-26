@@ -4,5 +4,8 @@ class AddToStoreBody(BaseModel):
     store_id: str
     file_id: str
 
-class Agent(BaseModel):
+class CreateAgent(BaseModel):
+    name: str
+
+class CreateStore(BaseModel):
     name: str
