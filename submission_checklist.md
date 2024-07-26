@@ -14,6 +14,9 @@
   
 - *A video or demo of your program in action*
   
+  Langchain Implementation: https://drive.google.com/file/d/1q9duz109l59ZGIbbESrbohMxt4w0jYE9/view?usp=sharing
+  OpenAI Assistants Implementation: 
+  
   
 
 

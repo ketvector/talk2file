@@ -9,8 +9,7 @@ router = APIRouter(
 
 @router.post("/upload/")
 async def create_upload_file(file: UploadFile, id: str):
-    if file.content_type != "application/pdf":
-        raise HTTPException(400, detail="Invalid document type")
+    #TODO: Validate the input file is pdf https://github.com/tiangolo/fastapi/issues/3364
     outpath_file = f"{os.environ['LOCAL_FILE_UPLOAD_DIRECTORY']}/{id}.pdf"
     async with aiofiles.open(outpath_file, 'wb+') as out_file:
         content = await file.read()  # async read
