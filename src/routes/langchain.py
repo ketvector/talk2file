@@ -45,6 +45,6 @@ async def queryAndPost(body: QueryAndPostBody):
             }]
         }
     else:
-        HTTPException(400, detail="Invalid document type")
+        HTTPException(400, detail="Invalid target type")
     
     

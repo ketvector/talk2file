@@ -50,8 +50,18 @@ There are two implementations I have provided for the interfaces:
  
 **5.2: RAG Quality**
 
+- experiment with different `chunk size` and `chunk overlap` values in the `document splitter`.
+- experiment with `similarity search threshold` instead of `top-k` for the `vector store retriver`.
+- try retrievers other than `VectorStore` like `ParentDocument` , `MultiVector`  or `MultiQuery`.
+- In the langchain implementation, also return `sources` or `citations`
+like the `openai-assistants` file search implementation does. 
+
 **5.3: Benchmarking/Metrics**
 
+- Option 1: Create a test dataset and use a traditional metric like `ROGUE` or `BLEU` . (Too effort intensive ?)
+- Option 2: Use [RAGAS](https://docs.ragas.io/en/stable/) to evaluate retriver and llm. ( Seems faster )
+- Option 3: Something custom made ? [G-Eval](https://arxiv.org/abs/2303.16634)
+ 
 **5.4: Code Quality**
 - Resolve all the TODOs
 - Better error handling at some places
