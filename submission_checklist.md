@@ -1,9 +1,21 @@
 **Requirements**
 
-- A link to your GitHub repository where you've hosted your code.
-- All the ways you can make the solution more accurate.
-- How you would have made your code more modular, scalable and production grade
-- A video or demo of your program in action
+- *A link to your GitHub repository where you've hosted your code.*
+
+  This repository
+  
+- *All the ways you can make the solution more accurate.*
+  
+  Please see README sections 5.2 & 5.3
+
+- *How you would have made your code more modular, scalable and production grade*
+  
+  Please see README 5.1 & 5.4
+  
+- *A video or demo of your program in action*
+  
+  
+
 
 **Specs**
 
